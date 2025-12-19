@@ -2,8 +2,13 @@ nelmio_api_doc:
     documentation:
         info:
             title: Symfony Assessment
-            description: These are the endpoints for my Symfony Assessment
+            description: REST API for managing country data
             version: 1.0.0
+        components:
+            securitySchemes:
+                basicAuth:
+                    type: http
+                    scheme: basic
     areas:
         path_patterns:
             - ^/api(?!/doc$)

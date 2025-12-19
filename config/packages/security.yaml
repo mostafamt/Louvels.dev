@@ -1,0 +1,45 @@
+security:
+    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+        Symfony\Component\Security\Core\User\InMemoryUser: 
+            algorithm: auto
+
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        in_memory:
+            memory:
+                users:
+                    admin:
+                        password: '$2y$13$JcQf4AV6W9HRnJolKOgameI9hJPsFAbzQvfAU2EF41j4lxxL4b262'
+                        roles: ['ROLE_ADMIN']
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        
+        api:
+            pattern: ^/api/v1/countries
+            stateless: true
+            http_basic:
+                realm: Secured Area
+            provider: in_memory
+
+        main:
+            lazy: true
+            provider: in_memory
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#the-firewall
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/api/v1/countries$, methods: [POST], roles: ROLE_ADMIN }
+        - { path: ^/api/v1/countries/, methods: [PATCH, DELETE], roles: ROLE_ADMIN }
+        - { path: ^/api/v1/countries, methods: [GET], roles: PUBLIC_ACCESS }
