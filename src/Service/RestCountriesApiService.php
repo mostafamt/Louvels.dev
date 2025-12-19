@@ -135,12 +135,14 @@ class RestCountriesApiService
             return $currency; // Return empty currency
         }
 
-        // Get first currency (currencies is an associative array like {"USD": {...}})
-        $firstCurrency = reset($data['currencies']);
+        // Get first currency code (the array key) and its data
+        $currencyCode = array_key_first($data['currencies']);
+        $currencyData = $data['currencies'][$currencyCode] ?? null;
 
-        if ($firstCurrency && is_array($firstCurrency)) {
-            $currency->setName($firstCurrency['name'] ?? null);
-            $currency->setSymbol($firstCurrency['symbol'] ?? null);
+        if ($currencyCode && $currencyData && is_array($currencyData)) {
+            $currency->setCode($currencyCode);
+            $currency->setName($currencyData['name'] ?? null);
+            $currency->setSymbol($currencyData['symbol'] ?? null);
         }
 
         return $currency;

@@ -30,7 +30,7 @@ class CountrySyncCommand extends Command
 
         $io->title('Syncing Countries from REST Countries API');
 
-        // Step 1: Fetch countries from API
+        // Step 1: Fetch countries from API using service
         try {
             $io->section('Fetching countries from API...');
             $apiCountries = $this->apiService->fetchAllCountries();
