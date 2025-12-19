@@ -1,10 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Repository;
 
 use App\Entity\Country;
-use Doctrine\Bundle\Doctrine\Repository\ServiceEntityRepository;
+// use Doctrine\Bundle\Doctrine\Repository\ServiceEntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 class CountryRepository extends ServiceEntityRepository
