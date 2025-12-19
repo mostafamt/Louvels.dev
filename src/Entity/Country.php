@@ -6,6 +6,7 @@ namespace App\Entity;
 use App\Entity\Embeddable\Currency;
 use App\Repository\CountryRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CountryRepository::class)]
 #[ORM\Table(name: 'country')]
@@ -17,30 +18,39 @@ class Country
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 10, unique: true)]
+    #[Groups(['country:read'])]
     private ?string $uuid = null;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['country:read'])]
     private ?string $name = null;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    #[Groups(['country:read'])]
     private ?string $region = null;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    #[Groups(['country:read'])]
     private ?string $subRegion = null;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    #[Groups(['country:read'])]
     private ?string $demonym = null;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['country:read'])]
     private ?int $population = null;
 
     #[ORM\Column(type: 'boolean', nullable: true)]
+    #[Groups(['country:read'])]
     private ?bool $independent = null;
 
     #[ORM\Column(type: 'string', length: 500, nullable: true)]
+    #[Groups(['country:read'])]
     private ?string $flag = null;
 
     #[ORM\Embedded(class: Currency::class)]
+    #[Groups(['country:read'])]
     private ?Currency $currency = null;
 
     public function __construct()
