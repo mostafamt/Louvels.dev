@@ -9,6 +9,16 @@ framework:
     #esi: true
     #fragments: true
 
+    # HTTP Client configuration
+    http_client:
+        default_options:
+            timeout: 30
+            max_redirects: 3
+            retry_failed:
+                max_retries: 2
+                delay: 1000
+                multiplier: 2
+
 when@test:
     framework:
         test: true
